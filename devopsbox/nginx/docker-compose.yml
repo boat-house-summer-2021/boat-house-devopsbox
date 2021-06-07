@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+    nginx:
+      container_name: nginx
+      image: 'nginx'
+      restart: always
+      # command: /bin/bash -c "mkdir /var/www && mkdir /var/www/html2 && chmod 777 /var/www/html2 && touch a.txt  && nginx -g daemon off;"
+      network_mode: host
+      volumes:
+        - '${PWD}/nginx.conf:/etc/nginx/nginx.conf'
+        - '/var/www/html:/var/www/html'
+

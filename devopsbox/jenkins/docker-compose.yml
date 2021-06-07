@@ -1,5 +1,6 @@
-jenkins:
+docker_jenkins:
     image: 'jenkins/jenkins:lts'
+    container_name: jenkins
     restart: always
  
     ports:
