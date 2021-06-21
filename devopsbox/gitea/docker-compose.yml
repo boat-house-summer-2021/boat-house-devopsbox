@@ -19,5 +19,5 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - "3000:3000"
+      - "3000:3000"   # 对外不暴露3000端口会导致部分功能跳转失败
       - "222:22"
