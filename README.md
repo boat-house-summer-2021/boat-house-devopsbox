@@ -13,21 +13,32 @@
 ## 启动 gitea
 cd devopsbox/gitea
 docker-compose up -d
+cd ../../
 
 ## 启动 wekan
 cd devopsbox/wekan
 docker-compose up -d
+cd ../../
 
 ## 启动 jenkins
 ### 首先修正jenkins_home目录权限
 cd devopsbox/jenkins
-sudo chown -R 1000:1000 jenkins_home
+sudo chown -R localadmin:localadmin jenkins_home
+docker-compose up -d
+
+## 启动 SonarQube
+### 首先配置一些系统参数
+#### 查看最大虚拟内存
+sysctl -a|grep vm.max_map_count
+#### 如果小于 262144，请执行如下命令
+sudo sysctl -w vm.max_map_count=262144 
+cd devopsbox/sonarqube
 docker-compose up -d
 ```
 
 以上启动完成后，通过以下地址就可以访问环境
 
 - 开源电子看板 wekan http://192.168.99.102:8081
-- 开源Git服务器 Gitea http://192.168.99.102:8082
+- 开源Git服务器 Gitea http://192.168.99.102:3000
 - 开源流水线 Jenkins http://192.168.99.102:8080
 

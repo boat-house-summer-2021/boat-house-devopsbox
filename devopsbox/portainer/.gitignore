@@ -1,1 +1,9 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
 data/*
+=======
+*data*
+>>>>>>> 7ede105 (add portainer)
+=======
+data/*
+>>>>>>> a36696a (add docker-compose-file and shell script)
