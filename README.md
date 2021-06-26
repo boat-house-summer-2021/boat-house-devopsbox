@@ -13,15 +13,26 @@
 ## 启动 gitea
 cd devopsbox/gitea
 docker-compose up -d
+cd ../../
 
 ## 启动 wekan
 cd devopsbox/wekan
 docker-compose up -d
+cd ../../
 
 ## 启动 jenkins
 ### 首先修正jenkins_home目录权限
 cd devopsbox/jenkins
-sudo chown -R 1000:1000 jenkins_home
+sudo chown -R localadmin:localadmin jenkins_home
+docker-compose up -d
+
+## 启动 SonarQube
+### 首先配置一些系统参数
+#### 查看最大虚拟内存
+sysctl -a|grep vm.max_map_count
+#### 如果小于 262144，请执行如下命令
+sudo sysctl -w vm.max_map_count=262144 
+cd devopsbox/sonarqube
 docker-compose up -d
 ```
 
