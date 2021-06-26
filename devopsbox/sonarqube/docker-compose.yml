@@ -5,7 +5,7 @@ services:
     image: sonarqube
     ports:
       - "9000:9000"
-    restart: always
+    restart: always 
     networks:
       - sonarnet
     environment:
@@ -23,7 +23,10 @@ services:
 
   db:
     image: postgres
+<<<<<<< HEAD
     restart: always
+=======
+>>>>>>> ccc7928794610f6b2bdb188da67ba9334ca1854c
     networks:
       - sonarnet
     environment:
