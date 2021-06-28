@@ -107,6 +107,7 @@ services:
     # Disable MongoDB logs:
     command: mongod --logpath /dev/null --oplogSize 128 --quiet
     networks:
+      - wekan-tier
       - devops-box
     expose:
       - 27017
@@ -127,6 +128,7 @@ services:
     container_name: wekan-app
     restart: always
     networks:
+      - wekan-tier
       - devops-box
     #-------------------------------------------------------------------------------------
     # ==== BUILD wekan-app DOCKER CONTAINER FROM SOURCE, if you uncomment these ====
@@ -677,6 +679,7 @@ volumes:
     driver: local
 
 networks:
+  wekan-tier:
+    driver: bridge
   devops-box:
     external: true
-    # driver: bridge
