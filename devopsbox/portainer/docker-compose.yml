@@ -1,13 +1,30 @@
 version: "3"
 
+networks:
+  portainer-tier:
+    driver: bridge
+  devops-box:
+    external: true
+
+volumes:
+  portainer-db:
+    driver: local
+
 services:
     portainer:
       image: 'portainer/portainer-ce:latest'
-      container_name: devops_box_portainer
+      container_name: portainer
       restart: always
 
       ports:
       - '8090:9000'
       
       volumes:
+        - /etc/timezone:/etc/timezone:ro
+        - /etc/localtime:/etc/localtime:ro
         - '/var/run/docker.sock:/var/run/docker.sock'
+        - 'portainer-db:/data'
+        # - '/home/${USER}/portainer_home/data:/data'
+      networks:
+        - portainer-tier
+        - devops-box

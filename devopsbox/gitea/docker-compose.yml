@@ -1,23 +1,32 @@
 version: "3"
 
 networks:
-  gitea:
-    external: false
+  gitea-tier:
+    driver: bridge
+  devops-box:
+    external: true
+
+volumes:
+  gitea-db:
+    driver: local
 
 services:
-  server:
+  docker_gitea:
     image: gitea/gitea:1.14.2
     container_name: gitea
     environment:
       - USER_UID=1000
       - USER_GID=1000
     restart: always
-    networks:
-      - gitea
-    volumes:
-      - ${PWD}/data:/data
+   
+    volumes:      
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
+      - gitea-db:/data      
+      # - /home/${USER}/gitea_home/data:/data      
     ports:
       - "3000:3000"   # 对外不暴露3000端口会导致部分功能跳转失败
       - "222:22"
+    networks:
+      - gitea-tier
+      - devops-box

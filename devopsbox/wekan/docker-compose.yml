@@ -113,6 +113,7 @@ services:
       - 27017
     volumes:
       - wekan-db:/data/db
+      - wekan-configdb:/data/configdb
       - wekan-db-dump:/dump
 
   wekan:
@@ -674,6 +675,8 @@ services:
 
 volumes:
   wekan-db:
+    driver: local
+  wekan-configdb:
     driver: local
   wekan-db-dump:
     driver: local

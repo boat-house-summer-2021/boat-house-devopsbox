@@ -10,6 +10,9 @@
 复制完成后，运行以下命令即可启动 DevOpsBox 环境，注意docker-compose都需要先进入各个工具的子目录后执行
 
 ```shell
+# （可选）创建统一网络
+docker network create devops-box
+
 ## 启动 gitea
 cd devopsbox/gitea
 docker-compose up -d
