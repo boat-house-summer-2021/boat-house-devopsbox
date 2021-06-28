@@ -1,13 +1,26 @@
-docker_jenkins:
+networks:
+  jenkins-tier:
+    driver: bridge
+  devops-box:
+    external: true
+
+volumes:
+  jenkins-db:
+    driver: local
+
+services:
+  docker_jenkins:
     image: 'jenkins/jenkins:lts'
     container_name: jenkins
     restart: always
- 
     ports:
       - '8080:8080'
-      - '50000:50000'
-  
+      - '50000:50000'  
     volumes:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
-      - '${PWD}/jenkins_home:/var/jenkins_home'
+      # - '/home/{$USER}/jenkins_home:/var/jenkins_home'
+      - jenkins-db:/var/jenkins_home    # 这样就不用创建jenkins_home目录了
+    networks:
+      - jenkins-tier
+      - devops-box
