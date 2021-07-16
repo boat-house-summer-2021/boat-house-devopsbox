@@ -3,8 +3,6 @@ version: "3"
 networks:
   portainer-tier:
     driver: bridge
-  devops-box:
-    external: true
 
 volumes:
   portainer-db:
@@ -27,4 +25,3 @@ services:
         # - '/home/${USER}/portainer_home/data:/data'
       networks:
         - portainer-tier
-        - devops-box
