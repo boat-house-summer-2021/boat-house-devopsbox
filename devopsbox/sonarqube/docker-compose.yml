@@ -3,6 +3,7 @@ version: "2"
 services:
   sonarqube:
     image: sonarqube
+    container_name: sonarqube_server
     ports:
       - "9000:9000"
     restart: always 
